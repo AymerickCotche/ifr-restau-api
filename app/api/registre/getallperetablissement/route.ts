@@ -6,6 +6,7 @@ export async function GET(request:NextRequest){
   try {
 
     const searchParams = request.nextUrl.searchParams
+    
     const etablissementId = searchParams.get('etablissementId')
 
     if (etablissementId) {
