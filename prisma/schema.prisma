@@ -130,8 +130,9 @@ model Utilisateur {
   motdepasse String
   role UtilisateurRole @relation(fields: [roleId], references: [id])
   roleId String
-  etablissement Etablissement @relation(fields: [etablissementId], references: [id])
-  etablissementId String
+  etablissement Etablissement? @relation(fields: [etablissementId], references: [id])
+  etablissementId String?
+  registres Registre[]
   createdAt         DateTime   @default(now()) @map(name: "created_at")
   updatedAt         DateTime   @updatedAt @map(name: "updated_at")
 }
@@ -139,6 +140,8 @@ model Utilisateur {
 model Registre {
   id        String  @default(cuid()) @id
   nom      String 
+  utilisateur Utilisateur @relation(fields: [utilisateurId], references: [id])
+  utilisateurId String
   etablissement Etablissement @relation(fields: [etablissementId], references: [id])
   etablissementId String
   LignesRegistres LignesRegistre[]

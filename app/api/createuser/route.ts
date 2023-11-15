@@ -12,16 +12,31 @@ interface RequestBody {
 export async function POST(request:Request) {
   const body: RequestBody = await request.json()
 
-  const user = await prisma.utilisateur.create({
-    data: {
-      email: body.email,
-      motdepasse: await bcrypt.hash(body.motdepasse, 10),
-      nom: body.nom,
-      roleId: body.roleId,
-      etablissementId: body.etablissementId
-    }
-  })
+  if (body.etablissementId) {
 
-  const { motdepasse, ...result} = user
-  return new Response(JSON.stringify(result))
+    const user = await prisma.utilisateur.create({
+      data: {
+        email: body.email,
+        motdepasse: await bcrypt.hash(body.motdepasse, 10),
+        nom: body.nom,
+        roleId: body.roleId,
+        etablissementId: body.etablissementId
+      }
+    })
+    const { motdepasse, ...result} = user
+    return new Response(JSON.stringify(result))
+  } else {
+    
+    const user = await prisma.utilisateur.create({
+      data: {
+        email: body.email,
+        motdepasse: await bcrypt.hash(body.motdepasse, 10),
+        nom: body.nom,
+        roleId: body.roleId
+      }
+    })
+    const { motdepasse, ...result} = user
+    return new Response(JSON.stringify(result))
+  }
+
 }
