@@ -144,7 +144,7 @@ model Registre {
   utilisateurId String
   etablissement Etablissement @relation(fields: [etablissementId], references: [id])
   etablissementId String
-  LignesRegistres LignesRegistre[]
+  lignesRegistres LignesRegistre[]
   createdAt         DateTime   @default(now()) @map(name: "created_at")
   updatedAt         DateTime   @updatedAt @map(name: "updated_at")
 }
