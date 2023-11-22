@@ -10,9 +10,8 @@ export async function GET(){
     if(etablissements){
       return NextResponse.json({etablissements}, {status: 200})
     } else {
-      return NextResponse.json({"apimessage": "Etablissements not found"})
+      throw new Error('etablissement not found')
     }
-
 
   } catch (error) {
     return NextResponse.json({error}, {status: 500})
