@@ -15,7 +15,8 @@ export async function GET(request:NextRequest){
           etablissementId: etablissementId
         },
         include: {
-          lignesRegistres: true
+          lignesRegistres: true,
+          utilisateur: true
         }
       })
     
